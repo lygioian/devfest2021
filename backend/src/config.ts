@@ -2,7 +2,7 @@ import path from 'path';
 
 export const IS_PRODUCTION = process.env.NODE_ENV == 'production';
 
-export const SERVICE_PORT = +process.env.PORT || 5000;
+export const SERVICE_PORT = +process.env.PORT || 3031;
 export const SERVICE_NAME = 'BUGS';
 
 export const ROOT_DOMAIN = 'bugs.vn';
