@@ -18,21 +18,22 @@ Hiện nay, do ảnh hưởng của đại dịch COVID-19 người dân Việt 
 
 ## Hướng dẫn sử dụng
 
+**Tải ứng dụng:**
+
+Tải ứng dụng hoặc tự cài đặt trên máy thông qua đường link dưới đây:
+
+```
+https://github.com/lygioian/devfest2021/
+Có thể cài đặt flutter và vào folder frontend/mdc_100_series gọi flutter run để start app
+```
+
 ### Đối với người cần hỗ trợ
 
 **Bước 1:**
 
-Tải ứng dụng thông qua đường link dưới đây:
-
-```
-https://github.com/zubairehman/flutter-boilerplate-project.git
-```
-
-**Bước 2:**
-
 Mở ứng dụng ở trang chủ và chọn mình cần giúp đỡ
 
-**Bước 3:**
+**Bước 2:**
 
 Chấp nhận tính năng yêu cầu vị trí người dùng. Chọn những vật dụng mình đang cần và tạo bài đăng.
 
