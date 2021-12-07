@@ -11,11 +11,18 @@ dependencies:
 
   cupertino_icons: ^1.0.3
   shrine_images: ^2.0.1
+  google_maps_flutter: ^2.1.1
+  http: ^0.13.4
+  json_serializable: ^6.1.1
+  geolocator: ^8.0.0
+  location: ^4.3.0
+  flutter_polyline_points: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  build_runner: ^2.1.5
 
 flutter:
   # TODO: Insert Fonts (103)
@@ -61,3 +68,4 @@ flutter:
     - packages/shrine_images/35-0.jpg
     - packages/shrine_images/36-0.jpg
     - packages/shrine_images/37-0.jpg
+    - /Users/danielnguyen/Repo/DevFest/frontend/mdc_100_series/assets/locations.json
