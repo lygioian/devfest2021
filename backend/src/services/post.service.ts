@@ -37,14 +37,24 @@ export class PostService {
 
         let newPost = addedDeviceStatus.ops[0] as Post;
         let postKey = newPost._id.toHexString();
-        const updated = this.update(newPost._id, { postKey: postKey });
+        const updated = this.updateById(newPost._id, { postKey: postKey });
         return postKey;
     }
 
-    async update(postId: ObjectID, data: any) {
+    async updateById(id: ObjectID, data: any) {
         const opUpdateResult = await this.deviceStatusCollection.updateOne(
             {
-                _id: postId,
+                _id: id,
+            },
+            { $set: data },
+        );
+        return opUpdateResult.result.nModified;
+    }
+
+    async update(postId: string, data: any) {
+        const opUpdateResult = await this.deviceStatusCollection.updateOne(
+            {
+                postKey: postId,
             },
             { $set: data },
         );
@@ -60,8 +70,8 @@ export class PostService {
         return true;
     }
 
-    async delete(statusId: ObjectID) {
-        return this.deviceStatusCollection.deleteOne(statusId);
+    async delete(key: string) {
+        return this.deviceStatusCollection.deleteOne({ postKey: key });
     }
 
     async findOne(query: any = {}, keepAll = false): Promise<Post> {

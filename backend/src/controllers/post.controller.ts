@@ -4,14 +4,7 @@ import _ from 'lodash';
 import { ObjectID } from 'bson';
 import { Request, Response, ServiceType } from '../types';
 import { Controller } from './controller';
-import {
-    UploadService,
-    AuthService,
-    MailService,
-    PostService,
-} from '../services';
-import { User } from '../models/user.model';
-import { UPLOAD_DIR, EMAIL_SENDER } from '../config';
+import { PostService } from '../services';
 
 @injectable()
 export class PostController extends Controller {
@@ -24,14 +17,15 @@ export class PostController extends Controller {
         this.router.post('/', this.createPost.bind(this));
         this.router.get('/', this.getPost.bind(this));
         this.router.get('/:postId', this.getPostById.bind(this));
-        this.router.patch('/', this.updatePost.bind(this));
+        this.router.patch('/:postKey', this.updatePost.bind(this));
+        this.router.delete('/:postKey', this.deletePost.bind(this));
     }
 
     async createPost(req: Request, res: Response) {
         try {
             const createdSlug = await this.postService.create(req.body);
             res.composer.success(
-                { post_key: createdSlug },
+                { postKey: createdSlug },
                 'Create Post Success',
             );
         } catch (error) {
@@ -64,11 +58,23 @@ export class PostController extends Controller {
 
     async updatePost(req: Request, res: Response) {
         try {
-            const createdSlug = await this.postService.create(req.body);
-            res.composer.success(
-                { post_key: createdSlug },
-                'Create Post Success',
+            const createdSlug = await this.postService.update(
+                req.params.postKey,
+                req.body,
             );
+            res.composer.success(createdSlug, 'Update Post Success');
+        } catch (error) {
+            console.log(error);
+            res.composer.badRequest(error.message);
+        }
+    }
+
+    async deletePost(req: Request, res: Response) {
+        try {
+            const createdSlug = await this.postService.delete(
+                req.params.postKey,
+            );
+            res.composer.success({}, 'Delete Post Success');
         } catch (error) {
             console.log(error);
             res.composer.badRequest(error.message);
