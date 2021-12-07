@@ -21,9 +21,20 @@ export class PostService {
     }
 
     async create(post: Post): Promise<string> {
+        post.media = [];
+        const nums = new Set<number>();
+        while (nums.size !== 5) {
+            nums.add(Math.floor(Math.random() * (14 - 0 + 1) + 0));
+        }
+
+        nums.forEach((element) => {
+            post.media.push(`https://api.devfest.top/static/${element}.jpeg`);
+        });
+
         const addedDeviceStatus = await this.deviceStatusCollection.insertOne(
             post,
         );
+
         let newPost = addedDeviceStatus.ops[0] as Post;
         let postKey = newPost._id.toHexString();
         const updated = this.update(newPost._id, { postKey: postKey });
