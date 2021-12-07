@@ -59,7 +59,7 @@ export class PostService {
         )) as Post;
 
         if (_.isEmpty(status))
-            throw new ErrorDeviceStatusInvalid('Device status not found');
+            throw new ErrorDeviceStatusInvalid('Post not found');
         return keepAll ? status : (_.omit(status) as Post);
     }
 
@@ -69,10 +69,7 @@ export class PostService {
         limit = 10,
         simplify = false,
     ): Promise<Post[]> {
-        let aggreateCommand: any[] = [
-            { $match: query },
-            { $sort: { createdAt: -1 } },
-        ];
+        let aggreateCommand: any[] = [{ $match: query }];
 
         // if (populate)
         //     aggreateCommand = this.populateDeviceStatus(aggreateCommand);

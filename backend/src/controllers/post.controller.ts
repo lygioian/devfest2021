@@ -52,10 +52,10 @@ export class PostController extends Controller {
 
     async getPostById(req: Request, res: Response) {
         try {
-            const postId = ObjectID.createFromHexString(req.params.bundleId);
-
-            const createdSlug = await this.postService.find({ _id: postId });
-            res.composer.success({ ...createdSlug }, 'Create Post Success');
+            const id = ObjectID.createFromHexString(req.params.postId);
+            console.log(id);
+            const createdSlug = await this.postService.findOne({ _id: id });
+            res.composer.success(createdSlug);
         } catch (error) {
             console.log(error);
             res.composer.badRequest(error.message);
