@@ -165,7 +165,7 @@ class _MapPageState extends State<MapPage> {
                     Navigator.pop(context);
                   },
                   child: const Icon(
-                    Icons.arrow_back_ios_new_rounded, // add custom icons also
+                    Icons.arrow_back, // add custom icons also
                   ),
                 )),
             body: FutureBuilder<Map>(

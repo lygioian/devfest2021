@@ -7,6 +7,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   intl: ^0.17.0-nullsafety.2
 
   cupertino_icons: ^1.0.3
@@ -18,6 +19,7 @@ dependencies:
   location: ^4.3.0
   flutter_polyline_points: ^1.0.0
   json_annotation: ^4.4.0
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +30,13 @@ dev_dependencies:
 flutter:
   # TODO: Insert Fonts (103)
   uses-material-design: true
+
+  fonts:
+    - family: Cormorant Garamond
+      fonts:
+        - asset: fonts/CormorantGaramond-Bold.ttf
+          style: normal
+          
   assets:
     - assets/diamond.png
     # TODO: Add slanted menu asset (104)
@@ -69,4 +78,4 @@ flutter:
     - packages/shrine_images/35-0.jpg
     - packages/shrine_images/36-0.jpg
     - packages/shrine_images/37-0.jpg
-    - /Users/danielnguyen/Repo/DevFest/frontend/mdc_100_series/assets/locations.json
+    - ./assets/locations.json

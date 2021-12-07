@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'dart:convert';
+import 'new_request.dart';
 import 'package:http/http.dart' as http;
-
 
 class Data {
   final String name;
@@ -31,7 +31,6 @@ class Data {
     required this.coordinates,
     required this.media,
   });
-
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       name: json['name'],
@@ -46,6 +45,13 @@ class Data {
   }
 }
 
+String name = '';
+String tel = '';
+String title = '';
+String address = '';
+String description = '';
+List<double> coordinates = [0.0, 0.0];
+List<String> media = ['', ''];
 
 class FormPage extends StatelessWidget {
   static String routeName = '/new_request/request_form';
@@ -65,8 +71,6 @@ class FormPage extends StatelessWidget {
   }
 }
 
-
-
 // Create a Form widget.
 class RequestForm extends StatefulWidget {
   const RequestForm({Key? key}) : super(key: key);
@@ -77,13 +81,12 @@ class RequestForm extends StatefulWidget {
   }
 }
 
+late Position currentPosition;
+
 class RequestFormState extends State<RequestForm> {
   final _formKey = GlobalKey<FormState>();
 
-  late Position currentPosition;
   late Data _imp;
-  var imp;
-
 
   Future<Data> createData() async {
     final response = await http.post(
@@ -157,8 +160,8 @@ class RequestFormState extends State<RequestForm> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter some text';
-                  }
-                  else imp.name = value;
+                  } else
+                    name = value;
                   return null;
                 },
               ),
@@ -176,8 +179,8 @@ class RequestFormState extends State<RequestForm> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter some text';
-                  }
-                  else imp.tel = value;
+                  } else
+                    tel = value;
                   return null;
                 },
               ),
@@ -195,8 +198,8 @@ class RequestFormState extends State<RequestForm> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter some text';
-                  }
-                  else imp.address = value;
+                  } else
+                    address = value;
                   return null;
                 },
               ),
@@ -214,8 +217,8 @@ class RequestFormState extends State<RequestForm> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter some text';
-                  }
-                  else imp.title = value;
+                  } else
+                    title = value;
                   return null;
                 },
               ),
@@ -234,8 +237,8 @@ class RequestFormState extends State<RequestForm> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Hãy nhập mô tả';
-                  }
-                  else imp.description = value;
+                  } else
+                    description = value;
                   return null;
                 },
               ),
@@ -249,16 +252,25 @@ class RequestFormState extends State<RequestForm> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _getGeoLocationPosition();
-                    imp.coordinates = currentPosition;
+                    coordinates = [
+                      currentPosition.latitude,
+                      currentPosition.longitude
+                    ];
                     _imp = Data(
-                      name: imp.name,
-                      tel: imp.tel,
-                      address: imp.address,
-                      description: imp.description,
-                      title: imp.title,
-                      requestHelp: imp.requestHelp,
-                      coordinates: imp.coordinates,
-                      media: ['https://pic/1', 'https://pic/2', 'https://pic/3', 'https://pic/4', 'https://pic/5'],
+                      name: name,
+                      tel: tel,
+                      address: address,
+                      description: description,
+                      title: title,
+                      requestHelp: requestHelp,
+                      coordinates: coordinates,
+                      media: [
+                        'https://pic/1',
+                        'https://pic/2',
+                        'https://pic/3',
+                        'https://pic/4',
+                        'https://pic/5'
+                      ],
                     );
                     createData();
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -271,6 +283,10 @@ class RequestFormState extends State<RequestForm> {
               ),
             ),
           ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 104, 0),
+              child: Text(
+                  'Lưu ý: nếu như không nhận được thông báo "đã gửi" xin hãy nhấn "Gửi" lần nữa')),
         ],
       ),
     );

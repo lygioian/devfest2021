@@ -2,12 +2,13 @@ import 'dart:ui';
 
 //import 'package:create_page/screens/home.dart';
 import 'package:flutter/material.dart';
-import 'request_form.dart'
+import 'request_form.dart';
+
+String requestHelp = '';
 
 class NewRequest extends StatelessWidget {
   NewRequest({Key? key}) : super(key: key);
 
-  var imp = Data();
   static String routeName = '/new_request';
   Image img1 = Image.network(
     'https://cdn1.iconfinder.com/data/icons/humanitarian-aid-filloutline/64/basket-food_and_restaurant-supply-healthy_food-diet-crate_-256.png',
@@ -47,7 +48,7 @@ class NewRequest extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/requestform');
-                      imp.requestHelp = 'Tiếp tế';
+                      requestHelp = 'Tiếp tế';
                     },
                   ),
                 ),
@@ -70,7 +71,7 @@ class NewRequest extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/requestform');
-                      imp.requestHelp = 'Dụng cụ học tập';
+                      requestHelp = 'Dụng cụ học tập';
                     },
                   ),
                 ),
@@ -93,7 +94,7 @@ class NewRequest extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/requestform');
-                      imp.requestHelp = 'Khác';
+                      requestHelp = 'Khác';
                     },
                   ),
                 ),

@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
         title: const Center(
           child: Text(
             "LinkUp",
+            style: TextStyle(fontFamily: 'Cormorant Garamond'),
             textAlign: TextAlign.center,
           ),
         ),
