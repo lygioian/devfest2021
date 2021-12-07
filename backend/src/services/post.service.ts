@@ -5,9 +5,10 @@ import _ from 'lodash';
 import { DatabaseService } from './database.service';
 import { ServiceType } from '../types';
 import { ErrorDeviceStatusInvalid } from '../lib/errors';
-import { lazyInject } from '../container';
 
 import { Post } from '../models/post.model';
+
+export const USER_FORBIDDEN_FIELDS = ['postKey'];
 
 @injectable()
 export class PostService {
@@ -36,7 +37,9 @@ export class PostService {
         );
 
         let newPost = addedDeviceStatus.ops[0] as Post;
-        let postKey = newPost._id.toHexString();
+        let postKey =
+            Math.floor(Math.random() * (20000000 - 0 + 1) + 100012) +
+            newPost._id.toHexString();
         const updated = this.updateById(newPost._id, { postKey: postKey });
         return postKey;
     }
@@ -81,7 +84,9 @@ export class PostService {
 
         if (_.isEmpty(status))
             throw new ErrorDeviceStatusInvalid('Post not found');
-        return keepAll ? status : (_.omit(status) as Post);
+        return keepAll
+            ? status
+            : (_.omit(status, USER_FORBIDDEN_FIELDS) as Post);
     }
 
     async find(
@@ -98,8 +103,7 @@ export class PostService {
         const status = await this.deviceStatusCollection
             .aggregate(aggreateCommand)
             .toArray();
-
-        return status;
+        return status.map((e) => _.omit(e, USER_FORBIDDEN_FIELDS) as Post);
     }
 
     private populateDeviceStatus(aggreateCommand: any) {
