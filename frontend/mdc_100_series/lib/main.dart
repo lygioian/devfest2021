@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
-import 'map.dart';
 
-void main() => runApp(const MapPage());
+import 'app.dart';
+
+void main() => runApp(const LinkUpApp());

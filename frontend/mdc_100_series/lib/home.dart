@@ -1,67 +1,113 @@
-// Copyright 2018-present the Flutter authors. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'model/products_repository.dart';
-import 'model/product.dart';
-import 'supplemental/asymmetric_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
+        title: const Center(
+          child: Text(
+            "LinkUp",
+            textAlign: TextAlign.center,
           ),
-          onPressed: () {
-            print('Menu button');
-          },
         ),
-        title: const Text('SHRINE'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              semanticLabel: 'search',
-            ),
-            onPressed: () {
-              print('Search button');
-            },
+
+        backgroundColor: Colors.deepOrange,
+      ),
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 20,
           ),
-          IconButton(
-            icon: const Icon(
-              Icons.tune,
-              semanticLabel: 'filter',
+          const Text(
+              "Giúp những người cần bạn, hoặc tìm những người bạn cần!",
+              style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+
+                Card(
+                  elevation: 10,
+                  child: InkWell(
+                    splashColor: Colors.deepOrange.withAlpha(30),
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context,
+                          '/helprequest',
+                      ); //Navigate to post help request here
+                    },
+                    child: Column(
+                      children: const [
+                        SizedBox(
+                          height: 25,
+                          width: 165,
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.warning_rounded, color: Color.fromARGB(150, 181, 148, 27)),
+                          iconSize: 100,
+                          onPressed: null,
+                        ),
+                        Text("Cần sự giúp đỡ?"),
+                        Text("Điền thông tin tại đây"),
+                        SizedBox(
+                          height: 25,
+                          width: 165,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                Card(
+                  elevation: 10,
+                  child: InkWell(
+                    splashColor: Colors.deepOrange.withAlpha(30),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/mapview'); //Navigate to map view here
+                    },
+                    child: Column(
+                      children: const [
+                        SizedBox(
+                            height: 25,
+                            width: 165
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.add_location, color: Color.fromARGB(150, 181, 148, 27)),
+                          iconSize: 100,
+                          onPressed: null,
+                        ),
+                        Text("Bạn muốn giúp đỡ?"),
+                        Text("Bắt đầu ngay!"),
+                        SizedBox(
+                          height: 25,
+                          width: 165,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+              ],
             ),
-            onPressed: () {
-              print('Filter button');
-            },
           ),
         ],
       ),
-      body: AsymmetricView(
-          products: ProductsRepository.loadProducts(Category.all)),
-      resizeToAvoidBottomInset: false,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            '/helprequest',
+          ); //Navigate to post help request here
+        },
+        tooltip: 'Get help!',
+        child: const Icon(Icons.warning_rounded, size: 35),
+        backgroundColor: Colors.deepOrange,
+      ),
     );
   }
 }

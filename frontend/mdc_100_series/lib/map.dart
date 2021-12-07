@@ -100,21 +100,14 @@ class _MapPageState extends State<MapPage> {
 
   void _getAllMarkers() {
     _data.forEach((user) {
+
       final marker = Marker(
         markerId: MarkerId(user['_id']),
         position: LatLng(double.parse(user['coordinates'][0]),
             double.parse(user['coordinates'][1])),
         icon: BitmapDescriptor.defaultMarker,
         onTap: () {
-          Navigator.pushNamed(context, '/smallDetail', arguments: {
-            '_id': user['_id'],
-            'name': user['name'],
-            'title': user['title'],
-            'tel': user['tel'],
-            'address': user['address'],
-            'description': user['description'],
-            'requestHelp': user['requestHelp']
-          });
+          Navigator.pushNamed(context, '/detailedpage', arguments: user['_id']);
         },
       );
 
@@ -166,7 +159,7 @@ class _MapPageState extends State<MapPage> {
                   'Người cần hỗ trợ quanh tôi',
                   textAlign: TextAlign.center,
                 ),
-                backgroundColor: Colors.blue[300],
+                backgroundColor: Colors.deepOrange,
                 leading: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);

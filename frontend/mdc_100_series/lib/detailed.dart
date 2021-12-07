@@ -9,7 +9,7 @@ class Data {
   final String address;
   final String description;
   final String requestHelp;
-  final List<String> media;
+  final List<dynamic> media;
 
   Data({
     required this.name,
@@ -46,7 +46,7 @@ class _DetailedPageState extends State<DetailedPage> {
 
   //Actual fetch from API function
   Future<Data> _fetchData(_id) async {
-    final response = await http.get(Uri.parse('https://heypay.top/post/$_id')); //Paste URL here
+    final response = await http.get(Uri.parse('https://api.devfest.top/post/$_id')); //Paste URL here
 
     if (response.statusCode == 200) {
       final value = jsonDecode(response.body);
@@ -75,7 +75,7 @@ class _DetailedPageState extends State<DetailedPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final _id = ModalRoute.of(context)!.settings.arguments;
+    final _id = ModalRoute.of(context)!.settings.arguments.toString();
     futureData = _fetchData(_id);
   }
 
@@ -84,12 +84,20 @@ class _DetailedPageState extends State<DetailedPage> {
 
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.pop(context);
-        }, //Navigate back to map view here
-      )),
+        title: const Padding(
+          padding: EdgeInsets.fromLTRB(100, 0, 10, 0),
+          child: Text(
+            'LinkUp',
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          }, //Navigate back to map view here
+        ),
+        backgroundColor: Colors.deepOrange,
+      ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(8),
@@ -98,7 +106,10 @@ class _DetailedPageState extends State<DetailedPage> {
               future: futureData,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text(snapshot.data!.title);
+                  return Text(
+                    snapshot.data!.title,
+                    textScaleFactor: 2,
+                  );
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
                 }
@@ -122,7 +133,7 @@ class _DetailedPageState extends State<DetailedPage> {
                         List<Widget> images = [];
                         for(int i = 0; i < count; i++) {
                           images.add(
-                            Image.asset(snapshot.data!.media[i]),
+                            Image.network(snapshot.data!.media[i].toString()),
                           )
                         ;}
                         return Row(
