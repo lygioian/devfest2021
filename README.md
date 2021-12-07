@@ -1,6 +1,6 @@
 # LinkUp Project - DevFest 2021
 
-![Logo](./logo.png)
+![Logo](./assets/logo.png)
 
 Chào mừng mọi người đến với dự án LinkUp, đây là một dự án cộng đồng nhằm hướng đến giúp đỡ cho những người có hoàn cảnh khó khăn đang cần giúp đỡ do ảnh hưởng của dịch bệnh COVID-19.
 
