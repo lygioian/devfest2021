@@ -29,6 +29,8 @@ Có thể cài đặt flutter và vào folder frontend/mdc_100_series gọi flut
 
 ### Đối với người cần hỗ trợ
 
+![Support](./assets/howtouse.gif)
+
 **Bước 1:**
 
 Mở ứng dụng ở trang chủ và chọn mình cần giúp đỡ
@@ -38,6 +40,8 @@ Mở ứng dụng ở trang chủ và chọn mình cần giúp đỡ
 Chấp nhận tính năng yêu cầu vị trí người dùng. Chọn những vật dụng mình đang cần và tạo bài đăng.
 
 ### Đối với người cần hỗ trợ
+
+![Support](./assets/howtohelp.gif)
 
 **Bước 1:**
 
